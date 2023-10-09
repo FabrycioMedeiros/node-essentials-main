@@ -35,9 +35,16 @@ app.put('/products', function(req, res) {
 // Received data [{"name":"product-updated","id":1}]
 // Connection closed
 
-app.delete('/products/:id', function (req, res) {
-  // implement
+app.delete('/products/:id', function(req, res) {
+  const deletedProduct = products.find(p => p.id === +req.params.id);
+  products = products.filter(p => p.id !== +req.params.id);
+  res.json(deletedProduct);
 });
+// Saida: response {"name":"product","id":1}
+//        Closed connection
+// Após atualização com "node client-get.js" temos:
+//    Received data []
+// Connection closed    
 
 app.get('/products', (req, res) => {
   res.json(products);
