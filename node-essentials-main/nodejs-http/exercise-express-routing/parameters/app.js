@@ -40,6 +40,6 @@ app.get("/products", (req, res) => {
   }
 });
 // Resposta: [{"id":1,"name":"Ivanhoe","author":"Sir Walter Scott"},{"id":2,"name":"Colour Magic","author":"Terry Pratchett"}] 
-// Xaso substitua para /?page=2&pageSize=2 teremos: [{"id":3,"name":"The Bluest eye","author":"Toni Morrison"}]
+// Caso substitua para /?page=2&pageSize=2 teremos: [{"id":3,"name":"The Bluest eye","author":"Toni Morrison"}]
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
