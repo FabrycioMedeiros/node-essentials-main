@@ -25,7 +25,21 @@ app.get("/", (req, res) => res.send("Hello API!"));
 app.get("/products/:id", (req, res) => {
   res.json(products.find(p => p.id === +req.params.id));
 });
+// Resposta : {"id":1,"name":"Ivanhoe","author":"Sir Walter Scott"}
 
-app.get("/products", (req, res) => {});
+app.get("/products", (req, res) => {
+  const page = +req.query.page;
+  const pageSize = +req.query.pageSize;
+
+  if (page && pageSize) {
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+    res.json(products.slice(start, end));
+  } else {
+    res.json(products);
+  }
+});
+// Resposta: [{"id":1,"name":"Ivanhoe","author":"Sir Walter Scott"},{"id":2,"name":"Colour Magic","author":"Terry Pratchett"}] 
+// Xaso substitua para /?page=2&pageSize=2 teremos: [{"id":3,"name":"The Bluest eye","author":"Toni Morrison"}]
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
